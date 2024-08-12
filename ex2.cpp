@@ -20,6 +20,7 @@ int main(){
 				}
 				else{
 					if(arr[j] > q.back()){
+						q.push(arr[j]);
 						count++;
 					}
 				}
