@@ -6,6 +6,7 @@ int main(){
 	int arr[6] = {4,8,6,9,1,1},i,j,count,freq[6]={0,0,0,0,0,0};
 	queue<int>q;
 	for(i=0;i<6;i++){
+		count = 0;
 		for(j=i+1;j<6;j++){
 			if(arr[i] <= arr[j]){
 				count++;
@@ -28,10 +29,9 @@ int main(){
 			q.pop();
 		}
 		freq[i] = count;
-		count = 0;
 	}
 	for(i=0;i<6;i++){
-		cout<<freq[i]<<endl;
+		cout<<freq[i]<<" ";
 	}
 	return 0;
 }
