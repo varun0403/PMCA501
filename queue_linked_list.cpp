@@ -53,7 +53,6 @@ void pop(){
         cout<<"Empty list!";
     }
     else{
-        count--;
         if(front == rear){
             free(front);
             free(rear);
@@ -61,12 +60,9 @@ void pop(){
             rear = NULL;
         }
         else{
-            struct node* current = front;
-            while(current->next->next != NULL){
-                current = current->next;
-            }
-            current->next = NULL;
+            front = front->next;
         }
+        count--;
     }
 }
 
