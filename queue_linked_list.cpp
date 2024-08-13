@@ -54,10 +54,10 @@ void pop(){
     }
     else{
         if(front == rear){
-            free(front);
-            free(rear);
             front = NULL;
             rear = NULL;
+	    free(front);
+            free(rear);
         }
         else{
             front = front->next;
