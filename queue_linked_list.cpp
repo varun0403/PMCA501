@@ -24,7 +24,6 @@ void push(int val){
         cout<<"Queue is full!"<<endl; 
     }
     else{
-        count++;
         struct node* new_node = (struct node*) malloc(sizeof(struct node));
         new_node->data = val;
         new_node->next = NULL;
@@ -45,6 +44,7 @@ void push(int val){
                 current->next = new_node;
             }
         }
+        count++;
     }
 }
 
@@ -57,6 +57,8 @@ void pop(){
         if(front == rear){
             free(front);
             free(rear);
+            front = NULL;
+            rear = NULL;
         }
         else{
             struct node* current = front;
