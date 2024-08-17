@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 const int size=5;
@@ -14,7 +15,7 @@ bool isFull(){
 }
 
 bool isEmpty(){
-	if(rear == -1){
+	if((rear == -1) || (front>rear)){
 		return true;
 	}
 	return false;
@@ -27,10 +28,10 @@ int enqueue(int val){
 	else{
 	    	cout<<"The inserted value is "<<val<<endl;
 		if((front == -1) && (rear == -1)){
-		    	front++;
-		    	rear++;
-		    	queue[front] = val;
-		}
+		    front++;
+		    rear++;
+		    queue[front] = val;
+	    	}
 		else{
 			rear++;
 			queue[rear] = val;
@@ -40,20 +41,25 @@ int enqueue(int val){
 }
 
 int dequeue(){
-	if(isEmpty() || front>rear){
+	if(isEmpty()){
 		cout<<"Queue empty!"<<endl;
 	}
 	else{
 	    	cout<<"Dequed value is "<<queue[front]<<endl;
-	    	front++;
+		front++;
 	}
 	return 0;
 }
 
 void display(){
 	int i;
-	for (i=front;i<=rear;i++){
-	    cout<<queue[i]<<"\t";
+	if(isEmpty()){
+	    cout<<"Empty queue!"<<endl;
+	}
+	else{
+	    for(i=front;i<=rear;i++){
+	        cout<<queue[i]<<"\t";
+	    }
 	}
 }
 
