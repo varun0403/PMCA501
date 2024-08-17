@@ -36,12 +36,12 @@ void push(int data){
 		}
 		else{
 			struct node* current = head;
-            while (current->next != NULL) {
-                current = current->next;
-            }
-            current->next = new_node;
-            top = new_node;
-            count++;
+		        while (current->next != NULL) {
+		        	current = current->next;
+		        }
+		        current->next = new_node;
+		        top = new_node;
+		        count++;
 		}
 	}
 }
@@ -53,7 +53,7 @@ void pop() {
             head = NULL;
             count--;
         } 
-		else{
+	else{
             struct node* current = head;
             while (current->next->next != NULL){
                 current = current->next;
@@ -64,7 +64,7 @@ void pop() {
             count--;
         }
     } 
-	else {
+    else {
         cout<<"Stack is empty!"<<endl;
     }
 }
