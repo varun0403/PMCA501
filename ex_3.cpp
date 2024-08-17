@@ -6,38 +6,41 @@ using namespace std;
 
 int priority(char a){
   	if(a == '^'){
-  		return 3;
+  		  return 3;
   	}
   	else if((a == '*') || (a == '/')){
-  		return 2;
+  		  return 2;
   	}
   	else if((a == '+') || (a == '-')){
-  		return 1;
+  		  return 1;
   	}
   	else{
-  		return 0;
+  		  return 0;
   	}
 }
 
 int arith(int a, int b, char c){
   	switch(c){
-  		case '+':
-  			return a+b;
-  			break;
-  		case '-':
-  			return a-b;
-  			break;
-  		case '*':
-  			return a*b;
-  			break;
-  		case '/':
-  			return a/b;
-  			break;
-  		case '^':
-  			return a^b;
-  			break;
-  		default:
-  			return -1;
+  		  case '+':
+  			    return a+b;
+  			    break;
+  		  case '-':
+  			    return a-b;
+  			    break;
+  		  case '*':
+  			    return a*b;
+  			    break;
+  		  case '/':
+            if(a>b){
+                return a/b
+            }
+  			    return b/a;
+  			    break;
+  		  case '^':
+  			    return a^b;
+  			    break;
+  		  default:
+  			    return -1;
   	}
 }
 
