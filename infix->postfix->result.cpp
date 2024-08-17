@@ -79,7 +79,12 @@ int arith(int a, int b, char c){
 			return a*b;
 			break;
 		case '/':
-			return a/b;
+			if(a>b){
+				return a/b;
+			}
+			else{
+				return b/a;
+			}
 			break;
 		case '^':
 			return a^b;
