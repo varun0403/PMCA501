@@ -39,7 +39,7 @@ int enqueue(int val){
 }
 
 int dequeue(){
-	if(isEmpty()){
+	if(isEmpty() || front>rear){
 		cout<<"Queue empty!"<<endl;
 	}
 	else{
