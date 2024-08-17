@@ -21,14 +21,15 @@ bool isEmpty(){
 }
 
 int enqueue(int val){
-	if((front == -1) && (rear == -1)){
-		front++;
-		rear++;
-		queue[front] = val;
+	if(isFull()){
+		cout<<"Queue is full!"<<endl;
 	}
 	else{
-		if(isFull()){
-			cout<<"Queue full!"<<endl;
+	    	cout<<"The inserted value is "<<val<<endl;
+		if((front == -1) && (rear == -1)){
+		    	front++;
+		    	rear++;
+		    	queue[front] = val;
 		}
 		else{
 			rear++;
@@ -43,23 +44,22 @@ int dequeue(){
 		cout<<"Queue empty!"<<endl;
 	}
 	else{
-		front++;
+	    	cout<<"Dequed value is "<<queue[front]<<endl;
+	    	front++;
 	}
 	return 0;
 }
 
-int peek(){
-	if(!isEmpty()){
-		return queue[front];
-	}
-	else{
-		cout<<"Empty queue!"<<endl;
+void display(){
+	int i;
+	for (i=front;i<=rear;i++){
+	    cout<<queue[i]<<"\t";
 	}
 }
 
 int main(){
 	int c,val;
-	cout<<"1)Push 2)Pop 3)Peek 4)Exit"<<endl;
+	cout<<"1)Push 2)Pop 3)Display 4)Exit"<<endl;
 	while(true){
 		cout<<"Enter your choice: ";
 		cin>>c;
@@ -73,8 +73,7 @@ int main(){
 				dequeue();
 				break;
 			case 3:
-				val = peek();
-				cout<<val<<endl;
+				display();
 				break;
 			case 4:
 				return 0;
