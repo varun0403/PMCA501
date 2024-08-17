@@ -103,7 +103,7 @@ int getResult(string postfix){
 			s.pop();
 			n1 = s.top();
 			s.pop();
-			res = arith(n1,n2,ch);
+			res = arith(n2,n1,ch);
 			s.push(res);
 		}
 	}
