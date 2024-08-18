@@ -136,7 +136,6 @@ int main() {
     cout<<"Enter an infix expression: ";
     cin>>exp;
     string rev_exp = reverse(exp);
-    rev_exp = replace(rev_exp);
     string prefix = convert(rev_exp);
     cout << prefix ;
     return 0;
