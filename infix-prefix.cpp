@@ -52,15 +52,6 @@ int peek() {
     return stack[top];
 }
 
-string reverse(string str){
-    string temp = "";
-    int i;
-    for(i = str.length() ; i >= 0 ; i--){
-        temp += str[i];
-    }
-    return temp;
-}
-
 string replace(string str){
     int i;
     for(i = 0 ; i <= str.length() ; i++){
@@ -72,6 +63,15 @@ string replace(string str){
         }
     }
     return str;
+}
+
+string reverse(string str){
+    string temp = "";
+    int i;
+    for(i = str.length() ; i >= 0 ; i--){
+        temp += str[i];
+    }
+    return replace(temp);
 }
 
 int priority(char a) {
@@ -132,7 +132,9 @@ string convert(string infix) {
 }
 
 int main() {
-    string exp = "A*B+C";
+    string exp;
+    cout<<"Enter an infix expression: ";
+    cin>>exp;
     string rev_exp = reverse(exp);
     rev_exp = replace(rev_exp);
     string prefix = convert(rev_exp);
