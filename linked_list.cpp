@@ -104,9 +104,33 @@ int count(){
     return c+1;
 }
 
+bool search(int data){
+    if(head == NULL){
+        cout<<"Empty array!"<<endl;
+    }
+    else{
+        if(head->next == NULL){
+            if(head->val == data){
+                return true;
+            }
+        }
+        else{
+            struct node* current = head;
+            while(current != NULL){
+                if(current->val == data){
+                    return true;
+                }
+                current = current->next;
+            }
+        }
+    }
+    return false;
+}
+
 int main(){
-    cout<<"1)Push at End 2)Push at Beg 3)Pop at end 4)Pop at beg 5)Traverse 6)Count"<<endl;
+    cout<<"1)Push at End 2)Push at Beg 3)Pop at end 4)Pop at beg 5)Traverse 6)Count 7)Search 8)Exit"<<endl;
     int c,val;
+    bool s;
     while(true){
         cout<<"Enter choice: ";
         cin>>c;
@@ -135,6 +159,12 @@ int main(){
                 cout<<val<<endl;
                 break;
             case 7:
+                cout<<"Enter val: ";
+                cin>>val;
+                s = search(val);
+                cout<<s<<endl;
+                break;
+            case 8:
                 return -1;
         }
     }
