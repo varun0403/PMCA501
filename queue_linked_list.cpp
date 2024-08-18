@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-const int size = 5;
+const int size = 4;
 
 struct node {
     int data;
@@ -41,6 +41,7 @@ void push(int val){
                 while(current->next != NULL){
                     current = current->next;
                 }
+                rear = new_node;
                 current->next = new_node;
             }
         }
@@ -56,7 +57,7 @@ void pop(){
         if(front == rear){
             front = NULL;
             rear = NULL;
-	    free(front);
+	        free(front);
             free(rear);
         }
         else{
@@ -67,8 +68,24 @@ void pop(){
 }
 
 int peek(){
-    int d = front->data;
-    return d;
+    if(isEmpty()){
+        return -1;
+    }
+    return front->data;
+}
+
+void display(){
+    struct node* temp = front;
+    if(front == rear){
+        cout<<front->data<<endl;
+    }
+    else{
+        while(temp != NULL){
+            cout<<temp->data<<"->";
+            temp = temp->next;
+        }
+        cout<<"NULL"<<endl;
+    }
 }
 
 int main(){
@@ -90,14 +107,17 @@ int main(){
 				
 			case 3:
 				temp = peek();
-				if(temp == 0){
-					cout<<"Empty list!"<<endl;
+				if(temp == -1){
+					cout<<"Empty queue!"<<endl;
 				}
 				else{
 					cout<<temp<<endl;
 				}
 				break;
-			
+				
+			case 4:
+			    	display();
+			    	break;
 			case 5:
 				return 0;
 				break;
