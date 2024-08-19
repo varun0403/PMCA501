@@ -10,38 +10,26 @@ struct node{
 
 struct node* front = NULL;
 struct node* rear = NULL;
-int count = 0, size = 5;
-
-bool isFull(){
-    return count == size;
-}
 
 bool isEmpty(){
-    return count == 0;
+    return front == NULL;
 }
 
 void push(int val) {
-    if (isFull()) {
-        cout << "Queue is full!" << endl;
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    new_node->data = val;
+    new_node->next = NULL;
+        
+    if (isEmpty()) {
+        front = new_node;
+        rear = new_node;
+        front->next = rear;
+        rear->next = front;
     } 
     else {
-        struct node* new_node = (struct node*) malloc(sizeof(struct node));
-        new_node->data = val;
-        new_node->next = NULL;
-        
-        if (isEmpty()) {
-            front = new_node;
-            rear = new_node;
-            front->next = rear;
-            rear->next = front;
-        } 
-        else {
-            new_node->next = front;  
-            rear->next = new_node;  
-            rear = new_node;         
-        }
-        
-        count++;
+        new_node->next = front;  
+        rear->next = new_node;  
+        rear = new_node;         
     }
 }
 
@@ -50,7 +38,7 @@ void pop(){
         cout<<"No elements in the circular queue"<<endl;
     }
     else{
-        if(count == 1){
+        if(front == rear){
             front = NULL;
             rear = NULL;
             free(front);
@@ -60,21 +48,20 @@ void pop(){
             front = front->next;
             rear->next = front;
         }
-        count--;
     }
 }
 
 void traverse(){
-    if(count == 0){
+    if(isEmpty()){
         cout<<"Queue is empty!"<<endl;
     }
     else{
-    struct node* current = front;
-    while(current->next != front){
-        cout<<current->data<<"->";
-        current = current->next;
-    }
-    cout<<current->data<<endl;
+        struct node* current = front;
+        while(current->next != front){
+            cout<<current->data<<"->";
+            current = current->next;
+        }
+        cout<<current->data<<endl;
     }
 }
 
