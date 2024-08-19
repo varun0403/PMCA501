@@ -1,7 +1,6 @@
 #include<iostream>
 #include<malloc.h>
 using namespace std;
-const int size = 5;
 
 struct node{
 	int val;
@@ -12,48 +11,35 @@ struct node* head = NULL;
 struct node* top = NULL;
 int count = 0;
 
-
-bool isFull(){
-	return size == count;
-}
-
 bool isEmpty(){
-	return count == 0;
+	return top == NULL;
 }
 
 void push(int data){
-	if(isFull()){
-		cout<<"Stack full!"<<endl;
+	struct node* new_node = (struct node*)malloc(sizeof(struct node));
+	new_node->next = NULL;
+	new_node->val = data;
+	if(isEmpty()){
+		head = new_node;
+		top = new_node;
 	}
 	else{
-		struct node* new_node = (struct node*)malloc(sizeof(struct node));
-		new_node->next = NULL;
-		new_node->val = data;
-		if(isEmpty()){
-			head = new_node;
-			top = new_node;
-			count++;
+		struct node* current = head;
+		while (current->next != NULL) {
+		    current = current->next;
 		}
-		else{
-			struct node* current = head;
-		        while (current->next != NULL) {
-		        	current = current->next;
-		        }
-		        current->next = new_node;
-		        top = new_node;
-		        count++;
-		}
+		current->next = new_node;
+		top = new_node;
 	}
 }
 
 void pop() {
     if (!isEmpty()){
-        if (head->next == NULL){
-            free(head);
+        if (head == top){
             head = NULL;
-            count--;
+            top = NULL;
         } 
-	else{
+	else {
             struct node* current = head;
             while (current->next->next != NULL){
                 current = current->next;
@@ -61,7 +47,6 @@ void pop() {
             free(current->next);
             current->next = NULL;
             top = current;
-            count--;
         }
     } 
     else {
@@ -131,5 +116,3 @@ int main(){
 	}
 	return 0;
 }
-
-
