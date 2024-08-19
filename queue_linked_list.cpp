@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-const int size = 4;
 
 struct node {
     int data;
@@ -9,43 +8,32 @@ struct node {
 
 struct node* front = NULL;
 struct node* rear = NULL;
-int count = 0;
 
 bool isEmpty(){
-    return count == 0;
-}
-
-bool isFull(){
-    return count == size;
+    return front == NULL;
 }
 
 void push(int val){
-    if(isFull()){
-        cout<<"Queue is full!"<<endl; 
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    new_node->data = val;
+    new_node->next = NULL;
+    if (isEmpty()){
+        front = new_node;
+        rear = new_node;
     }
     else{
-        struct node* new_node = (struct node*) malloc(sizeof(struct node));
-        new_node->data = val;
-        new_node->next = NULL;
-        if (isEmpty()){
-            front = new_node;
+        if(front == rear){
             rear = new_node;
+            front->next = rear;
         }
         else{
-            if(front == rear){
-                rear = new_node;
-                front->next = rear;
-            }
-            else{
-                struct node* current = front;
-                while(current->next != NULL){
+            struct node* current = front;
+            while(current->next != NULL){
                     current = current->next;
-                }
-                rear = new_node;
-                current->next = new_node;
             }
+            rear = new_node;
+            current->next = new_node;
         }
-        count++;
     }
 }
 
@@ -57,13 +45,12 @@ void pop(){
         if(front == rear){
             front = NULL;
             rear = NULL;
-	        free(front);
+	    free(front);
             free(rear);
         }
         else{
             front = front->next;
         }
-        count--;
     }
 }
 
