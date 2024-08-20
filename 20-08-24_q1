@@ -13,7 +13,7 @@ struct node* head = NULL;
 void traverse(){
     struct node* temp = head;
     while(temp->next != NULL){
-        cout<<temp->emp_id<<"->";
+        cout<<temp->emp_id<<" ";
         temp = temp->next;
     }
     cout<<temp->emp_id<<endl;
@@ -24,7 +24,7 @@ void insert(int data){
 	new_node->emp_id = data;
 	new_node->next = NULL;
 	new_node->prev = NULL;
-	cout<<"The inserted node is "<<new_node->emp_id<<endl;
+	cout<<"Node inserted"<<endl;
 	if(head == NULL){
 		head = new_node;
 	}
@@ -42,7 +42,6 @@ int main(){
     cin>>n;
     int arr[n];
     for(int i=0; i<n; i++){
-        cout<<"\nEnter emp id: ";
         cin>>arr[i];
     }
     
