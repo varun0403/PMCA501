@@ -1,0 +1,75 @@
+#include <iostream>
+#include <malloc.h>
+
+using namespace std;
+
+struct node{
+    int data;
+    struct node* next;
+};
+
+struct node* front = NULL;
+struct node* rear = NULL;
+
+bool isEmpty(){
+    return front == NULL;
+}
+
+void push(int val) {
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+    new_node->data = val;
+    new_node->next = NULL;
+        
+    if (isEmpty()) {
+        front = new_node;
+        rear = new_node;
+        front->next = rear;
+        rear->next = front;
+    } 
+    else {
+        new_node->next = front;  
+        rear->next = new_node;  
+        rear = new_node;         
+    }
+}
+
+void pop(){
+    if(isEmpty()){
+        cout<<"No elements in the circular queue"<<endl;
+    }
+    else{
+        struct node* temp = front;
+        while(temp->next != rear){
+            temp = temp->next;
+        }
+        temp->next = front;
+        rear = temp;
+    }
+}
+
+void traverse(){
+    if(isEmpty()){
+        cout<<"Queue is empty!"<<endl;
+    }
+    else{
+        struct node* current = front;
+        while(current->next != rear){
+            cout<<current->data<<" ";
+            current = current->next;
+        }
+        cout<<current->data<<endl;
+    }
+}
+
+int main(){
+    int n;
+    cout<<"Enter limit: ";
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+        push(arr[i]);
+    }
+    traverse();
+    return 0;
+}
