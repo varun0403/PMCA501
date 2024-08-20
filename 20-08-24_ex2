@@ -1,0 +1,104 @@
+#include<iostream>
+#include<malloc.h>
+using namespace std;
+
+struct node{
+	char data;
+	struct node* prev;
+	struct node* next;
+};
+
+struct node* head = NULL;
+struct node* tail = NULL;
+
+void insert_beg(int val){
+	struct node* new_node = (struct node*) malloc(sizeof(struct node));
+	new_node->data = val;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	if(head == NULL){
+	    head = new_node;
+	    tail = new_node;
+	}
+	else{
+	    new_node->next = head;
+	    head->prev = new_node;
+	    head = new_node;
+	}
+}
+
+void insert_end(int val){
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+	new_node->data = val;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	if(head == NULL){
+	    head = new_node;
+	    tail = new_node;
+	}
+	else{
+	    if(head == tail){
+	        new_node->prev = head;
+	        head->next = new_node;
+	        tail = new_node;
+	    }
+	    else{
+	        struct node* temp = head;
+	        while(temp->next != NULL){
+	            temp = temp->next;
+	        }
+	        temp->next = new_node;
+	        new_node->prev = temp;
+	        tail = new_node;
+	    }
+	}
+}
+
+void traverse(int type){
+    if(type == 1){
+        struct node* current = head;
+        while(current->next != NULL){
+            cout<<current->data<<"-";
+            current = current->next;
+        }
+        cout<<current->data;
+    }
+    else{
+        struct node* current = tail;
+        while(current->prev != NULL){
+            cout<<current->data<<"-";
+            current = current->prev;
+        }
+        cout<<current->data;
+    }
+}
+
+int main(){
+    cout<<"1) Insert Beg 2) Insert End 3)Traverse 4)Exit"<<endl;
+    char c;
+    int v,val,h;
+    while(true){
+        cout<<"\nEnter choice: ";
+        cin>>v;
+        switch(v){
+            case 1:
+                cout<<"Enter char: ";
+                cin>>c;
+                insert_beg(c);
+                break;
+            case 2:
+                cout<<"Enter char: ";
+                cin>>c;
+                insert_end(c);
+                break;
+            case 3:
+                cout<<"Enter type: ";
+                cin>>h;
+                traverse(h);
+                break;
+            case 4:
+                return -1;
+        }
+    }
+    return 0;
+}
