@@ -20,17 +20,15 @@ void push(int val) {
     new_node->data = val;
     new_node->next = NULL;
         
-    if (isEmpty()) {
-        front = new_node;
-        rear = new_node;
-        front->next = rear;
-        rear->next = front;
-    } 
-    else {
-        new_node->next = rear;  
-        front->next = new_node;  
-        front = new_node;         
-    }
+    if(isEmpty()){
+    	front = new_node;
+    	rear = new_node;
+	}
+	else{
+		new_node->next = rear;
+		rear = new_node;
+		front->next = rear;
+	}
 }
 
 void traverse(){
@@ -38,8 +36,8 @@ void traverse(){
         cout<<"Queue is empty!"<<endl;
     }
     else{
-        struct node* current = front;
-        while(current->next != front){
+        struct node* current = rear;
+        while(current->next != rear){
             cout<<current->data<<" ";
             current = current->next;
         }
@@ -53,11 +51,11 @@ int main(){
     	cin>>c;
     	if(c == -1){
     		break;
-		}
-		else{
-			push(c);
-		}
 	}
-	traverse();
+	else{
+		push(c);
+	}
+     }
+    traverse();
     return 0;
 }
