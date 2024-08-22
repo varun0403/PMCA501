@@ -143,6 +143,26 @@ void sort(){
     }
 }
 
+void isDistinct(){
+    struct node *curr = head;
+    while(curr->next != NULL){
+        if(curr->val == curr->next->val){
+            cout<<"Not distinct"<<endl;
+            return;
+        }
+        curr = curr->next;
+    }
+    cout<<"distinct nodes"<<endl;
+}
+
+void minimum();
+void maximum();
+void sum();
+void avg();
+void insert_mid();
+void pop_mid();
+void sliding_window();
+
 int main(){
     cout<<"1)Push at End 2)Push at Beg 3)Pop at end 4)Pop at beg 5)Traverse 6)Count 7)Search 8)Sort"<<endl;
     int c,val;
