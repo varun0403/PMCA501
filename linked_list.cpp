@@ -127,8 +127,24 @@ bool search(int data){
     return false;
 }
 
+void sort(){
+    int c = count();
+    int t;
+    for(int i=0; i<c; i++){
+        struct node *temp = head;
+        while(temp->next != NULL){
+            if(temp->val > temp->next->val){
+                t = temp->val;
+                temp->val = temp->next->val;
+                temp->next->val = t;
+            }
+            temp = temp->next;
+        }
+    }
+}
+
 int main(){
-    cout<<"1)Push at End 2)Push at Beg 3)Pop at end 4)Pop at beg 5)Traverse 6)Count 7)Search 8)Exit"<<endl;
+    cout<<"1)Push at End 2)Push at Beg 3)Pop at end 4)Pop at beg 5)Traverse 6)Count 7)Search 8)Sort"<<endl;
     int c,val;
     bool s;
     while(true){
@@ -165,7 +181,8 @@ int main(){
                 cout<<s<<endl;
                 break;
             case 8:
-                return -1;
+                sort();
+                break;
         }
     }
     return 0;
