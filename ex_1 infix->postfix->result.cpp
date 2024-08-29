@@ -43,21 +43,20 @@ string convert(string infix){
 				}
 			}
 		}
-		else 
-		{
-		if(c == '('){
-			s.push(c);
+		else {
+			if(c == '('){
+				s.push(c);
+			}
+			else if(c == ')'){
+				temp = s.top();
+				postfix += temp;
+				s.pop();
+				s.pop();
+			}
+			else{
+				postfix += c;
+			}
 		}
-		else if(c == ')'){
-			temp = s.top();
-			postfix += temp;
-			s.pop();
-			s.pop();
-		}
-		else{
-			postfix += c;
-		}
-	}
 	}
 	
 	while(!s.empty()){
