@@ -45,28 +45,6 @@ void insert(int val){
 	}
 }
 
-void del(int val){
-	struct node* new_node = (struct node*)malloc(sizeof(struct node));
-	new_node->data = val;
-	new_node->left = NULL;
-	new_node->right = NULL;
-	if(root == NULL){
-		root = new_node;
-		return;
-	}
-	struct node *temp = root;
-	while(temp->data != val){
-		if(val < temp->data){
-			temp = temp->left
-		}
-		else{
-			temp = temp->right;
-		}
-	}
-	
-	
-}
-
 void bfs(){
 	queue<node*>q;
 	struct node *temp;
