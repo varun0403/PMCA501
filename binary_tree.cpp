@@ -12,6 +12,7 @@ struct node{
 };
 
 struct node *root = NULL;
+struct node *temp = root;
 
 void insert(int val){
 	struct node* new_node = (struct node*)malloc(sizeof(struct node));
@@ -22,28 +23,66 @@ void insert(int val){
 		root = new_node;
 		return;
 	}
-	struct node *temp = root;
-	while(temp != NULL){
-		if(val < temp->data){
-			if(temp->left == NULL){
-				temp->left = new_node;
+	struct node *current = root;
+	while(current != NULL){
+		if(val < current->data){
+			if(current->left == NULL){
+				current->left = new_node;
 				return;
 			}
 			else{
-				temp = temp->left;
+				current = current->left;
 			}
 		}
 		else{
-			if(temp->right == NULL){
-				temp->right = new_node;
+			if(current->right == NULL){
+				current->right = new_node;
 				return;
 			}
 			else{
-				temp = temp->right;
+				current = current->right;
 			}
 		}
 	}
 }
+
+void insert_recursive(struct node* temp,int val){
+	if(root == NULL){
+		struct node* new_node = (struct node*)malloc(sizeof(struct node));
+		new_node->data = val;
+		new_node->left = NULL;
+		new_node->right = NULL;
+		root = new_node;
+		return;
+	}
+	if(temp->data > val){
+		if(temp->left == NULL){
+			struct node* new_node = (struct node*)malloc(sizeof(struct node));
+			new_node->data = val;
+			new_node->left = NULL;
+			new_node->right = NULL;
+			temp->left = new_node;
+		}
+		else{
+			temp = temp->left;
+			insert_recursive(temp,val);
+		}
+	}
+	else{
+		if(temp->right == NULL){
+			struct node* new_node = (struct node*)malloc(sizeof(struct node));
+			new_node->data = val;
+			new_node->left = NULL;
+			new_node->right = NULL;
+			temp->right = new_node;
+		}
+		else{
+			temp = temp->right;
+			insert_recursive(temp,val);
+		}
+	}
+}
+
 
 void bfs(){
 	queue<node*>q;
@@ -110,21 +149,42 @@ void leaf_nodes(){
 	for(int i=0; i<arr.size(); i++){
 		cout<<arr[i]<<" ";
 	}
+	cout<<"\n";
+}
+
+void search(struct node *temp, int val){
+	if(temp == NULL){
+		cout<<"Empty tree!"<<endl;
+		return;
+	}
+	if(temp->data == val){
+		cout<<"Element present in the tree"<<endl;
+		return;
+	}
+	else{
+		if(temp->data < val){
+			search(temp->right,val);
+		}
+		else{
+			search(temp->left,val);
+		}
+	}
 }
 
 int main(){
-	insert(7);
-	insert(4);
-	insert(9);
-	insert(3);
-	insert(6);
-	insert(5);
-	insert(11);
+	insert_recursive(root,17);
+	insert_recursive(root,19);
+	insert_recursive(root,8);
+	insert_recursive(root,9);
+	insert_recursive(root,3);
+	insert_recursive(root,5);
+	insert_recursive(root,11);
 	cout<<"Breadth First Search: ";
 	bfs();
 	cout<<"\nDepth First Search  : ";
 	dfs();
 	cout<<"\nLeaf Nodes: ";
 	leaf_nodes();
+	search(root,115);
 	return 0;
 }
