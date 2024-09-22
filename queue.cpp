@@ -1,11 +1,9 @@
 #include<iostream>
-
 using namespace std;
 
-const int size=5;
-int queue[size];
-int front = -1;
-int rear = -1;
+const int size = 5;
+int arr[size];
+int front = -1, rear = -1;
 
 bool isFull(){
 	if(rear == size-1){
@@ -15,65 +13,66 @@ bool isFull(){
 }
 
 bool isEmpty(){
-	if((rear == -1) || (front>rear)){
+	if(front == -1){
 		return true;
 	}
 	return false;
 }
 
-int enqueue(int val){
+void enqueue(int val){
 	if(isFull()){
 		cout<<"Queue is full!"<<endl;
 	}
 	else{
-	    	cout<<"The inserted value is "<<val<<endl;
-		if((front == -1) && (rear == -1)){
-		    front++;
-		    rear++;
-		    queue[front] = val;
-	    	}
+		if(isEmpty()){
+			front++;
+			rear++;
+			arr[rear] = val;
+		}
 		else{
 			rear++;
-			queue[rear] = val;
+			arr[rear] = val;
 		}
 	}
-	return 0;
 }
 
-int dequeue(){
+void dequeue(){
 	if(isEmpty()){
-		cout<<"Queue empty!"<<endl;
+		cout<<"Queue is empty!"<<endl;
 	}
 	else{
-	    	cout<<"Dequed value is "<<queue[front]<<endl;
-		front++;
+		if(front == rear){
+			front = -1;
+			rear = -1;
+		}
+		else{
+			front++;
+		}
 	}
-	return 0;
 }
 
 void display(){
-	int i;
-	if(isEmpty()){
-	    cout<<"Empty queue!"<<endl;
+	if(!isEmpty()){
+		for(int i=front; i<=rear; i++){
+			cout<<arr[i]<<" ";
+		}
+		cout<<endl;
+		return;
 	}
-	else{
-	    for(i=front;i<=rear;i++){
-	        cout<<queue[i]<<"\t";
-	    }
-	}
+	cout<<"Queue is empty!"<<endl;
 }
 
 int main(){
-	int c,val;
-	cout<<"1)Push 2)Pop 3)Display 4)Exit"<<endl;
+	int data,ch;
+	cout<<"1) Enqueue 2) Dequeue 3) Display 4) Exit"<<endl;
 	while(true){
-		cout<<"Enter your choice: ";
-		cin>>c;
-		switch(c){
+		cout<<"\nEnter your choice: ";
+		cin>>ch;
+		switch(ch){
 			case 1:
-				cout<<"\nEnter a value: ";
-				cin>>val;
-				enqueue(val);
+				cout<<"\nEnter insert value: ";
+				cin>>data;
+				enqueue(data);
 				break;
 			case 2:
 				dequeue();
@@ -82,7 +81,9 @@ int main(){
 				display();
 				break;
 			case 4:
-				return 0;
+				return -1;
+			default:
+				cout<<"\nIncorrect option!"<<endl;
 		}
 	}
 }
