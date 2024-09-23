@@ -65,7 +65,7 @@ void bubble_sort(){
 	}
 }
 
-void insertion_sort(){
+void selection_sort(){
 	int temp;
 	struct node *outer = head;
 	while(outer != NULL){
