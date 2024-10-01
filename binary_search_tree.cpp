@@ -11,43 +11,17 @@ struct node {
     struct node* right;
 };
 
-struct node* root = NULL;
-
-struct node* createNode(int val) {
-    struct node* new_node = (struct node*)malloc(sizeof(struct node));
+struct node *createNode(int val) {
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
     new_node->data = val;
     new_node->left = NULL;
     new_node->right = NULL;
     return new_node;
 }
 
-void insert_iter(int val) {
-    struct node* new_node = createNode(val);
-    if (root == NULL) {
-        root = new_node;
-        return;
-    }
-    struct node* current = root;
-    while (true) {
-        if (val < current->data) {
-            if (current->left == NULL) {
-                current->left = new_node;
-                return;
-            }
-            current = current->left;
-        } else {
-            if (current->right == NULL) {
-                current->right = new_node;
-                return;
-            }
-            current = current->right;
-        }
-    }
-}
-
-void insert(struct node* temp, int val) {
-    if (root == NULL) {
-        root = createNode(val);
+void insert(struct node* &temp, int val) {
+    if (temp == NULL) {
+        temp = createNode(val);
         return;
     }
     if (temp->data > val) {
@@ -68,27 +42,26 @@ void insert(struct node* temp, int val) {
     }
 }
 
-void del(struct node *&temp, int val){ //need to write code to del leaf nodes
+void del(struct node *&temp, int val){ 
 	if(temp->data == val){
-		if(temp->left != NULL && temp->right == NULL){
+		if(temp->left == NULL && temp->right == NULL){ //zero children
 			free(temp);
 			temp = NULL;
 			return;
 		}
-		else if(temp->left != NULL && temp->right == NULL){
+		else if(temp->left != NULL && temp->right == NULL){ //only one child: left child
 			swap(temp->data,temp->left->data);
 			temp->left = NULL;
 			return;
 		}
-		else if(temp->left == NULL && temp->right != NULL){
+		else if(temp->left == NULL && temp->right != NULL){ //only one child: right child
 			swap(temp->data,temp->right->data);
 			temp->right = NULL;
 			return;
 		}
-		else{
+		else{ //two children
 			struct node *current = temp->right;
 			if(current->left == NULL){
-				cout << "---"<<current->data<<"------"<<temp->data;
 				swap(current->data,temp->data);
 				temp->right = NULL;
 				return;
@@ -111,11 +84,11 @@ void del(struct node *&temp, int val){ //need to write code to del leaf nodes
 	}
 }
 
-void bfs() {
+void bfs(struct node *topNode) {
     queue<node*> q;
     struct node* temp;
     vector<int> arr;
-    q.push(root);
+    q.push(topNode);
     while (!q.empty()) {
         temp = q.front();
         q.pop();
@@ -132,11 +105,11 @@ void bfs() {
     }
 }
 
-void dfs() {
+void dfs(struct node *topNode) {
     stack<node*> s;
     struct node* temp;
     vector<int> arr;
-    s.push(root);
+    s.push(topNode);
     while (!s.empty()) {
         temp = s.top();
         s.pop();
@@ -153,11 +126,11 @@ void dfs() {
     }
 }
 
-void leaf_nodes() {
+void leaf_nodes(struct node *topNode) {
     queue<node*> q;
     struct node* temp;
     vector<int> arr;
-    q.push(root);
+    q.push(topNode);
     while (!q.empty()) {
         temp = q.front();
         q.pop();
@@ -203,27 +176,45 @@ void search(struct node* temp, int val) {
 	}
 }
 
+bool completeTree(struct node *&temp){
+	queue<node*>q;
+	struct node *current;
+	q.push(temp);
+	while(q.front() != NULL){
+		current = q.front();
+		q.pop();
+		q.push(current->left);
+		q.push(current->right);
+	}
+	while(!q.empty()){
+		if(q.front() != NULL){
+			return false;
+		}
+		q.pop();
+	}
+	return true;
+}
+
+int height(struct node *root) {
+    if (root == NULL) {
+        return 0; 
+    }
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+    return 1 + max(leftHeight, rightHeight);
+}
+
 int main() {
-    insert(root, 10);
-    insert(root, 5);
+	struct node *root = NULL;
+    insert(root, 50);
+    insert(root, 75);
+    insert(root, 25);
+    insert(root, 35);
+    insert(root, 20);
     insert(root, 15);
-    insert(root, 3);
-    insert(root, 7);
-    insert(root, 12);
-    insert(root, 17);
-    insert(root, 2);
-    insert(root, 4);
-    insert(root, 6);
-    insert(root, 9);
-    insert(root, 11);
-    insert(root, 13);
-    insert(root, 16);
-    insert(root, 18);
-    insert(root, 1);
     cout << "Breadth First Search: ";
-    bfs();
-    del(root,5);
-    cout << "\nBreadth First Search: ";
-    bfs();
+    bfs(root);
+    bool status = completeTree(root);
+    cout << "Is the tree complete: " << status;
     return 0;
 }
