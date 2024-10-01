@@ -28,18 +28,18 @@ void insert(struct node* &temp, int val) {
         if (temp->left == NULL) {
             temp->left = createNode(val);
         } 
-		else {
+	else {
             insert(temp->left, val);
         }
     } 
 	else {
-        if (temp->right == NULL) {
-            temp->right = createNode(val);
-        } 
+        	if (temp->right == NULL) {
+            		temp->right = createNode(val);
+       		} 
 		else {
-            insert(temp->right, val);
-        }
-    }
+            		insert(temp->right, val);
+        	}
+    	}
 }
 
 void del(struct node *&temp, int val){ 
@@ -136,7 +136,8 @@ void leaf_nodes(struct node *topNode) {
         q.pop();
         if (temp->left == NULL && temp->right == NULL) {
             arr.push_back(temp->data);
-        } else {
+        } 
+	else {
             if (temp->left != NULL) {
                 q.push(temp->left);
             }
@@ -152,9 +153,9 @@ void leaf_nodes(struct node *topNode) {
 }
 
 void search(struct node *temp, int val) {
-    if(temp->data == val){
-    	cout << "Element present!" << endl;
-    	return;
+	if(temp->data == val){
+    		cout << "Element present!" << endl;
+    		return;
 	}
 	else{
 		if(temp->data > val){
@@ -206,11 +207,11 @@ bool fullTree(struct node *temp){
 			return false;
 		}
 		if (current->left != NULL) {
-            q.push(current->left);
-        }
-        if (current->right != NULL) {
-            q.push(current->right);
-        }
+            		q.push(current->left);
+        	}
+        	if (current->right != NULL) {
+            		q.push(current->right);
+       	 	}
 	}
 	return true;
 }
@@ -225,7 +226,7 @@ int height(struct node *root) {
 }
 
 int main() {
-	struct node *root = NULL;
+    struct node *root = NULL;
     insert(root, 10);
     insert(root, 12);
     insert(root, 6);
