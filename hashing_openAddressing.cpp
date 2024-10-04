@@ -15,45 +15,37 @@ class HashTable{
 	
 	void insert(int data){
 		int hash_val = data % size;
-		if(arr[hash_val] == 0){
-			arr[hash_val] = data;
-			return;
-		}
-		else{
-			int start = hash_val;
-			int end = (hash_val + 1) % size;
-			while(start != end){
-				if(arr[end] == 0){
-					arr[end] = data;
-					return;
-				}
-				else{
-					end = (end + 1) % size;		
-				}
+		int temp = hash_val;
+		while(true){
+			if(arr[hash_val] == 0){
+				arr[hash_val] = data;
+				return;
 			}
-			cout<<"No slots in hashtable to insert "<<endl;
+			else{
+				hash_val = (hash_val + 1) % size;
+				if(hash_val == temp){
+					cout << "No slots available." << endl;
+					return;
+				} 
+			}
 		}
 	}
 	
 	void del(int data){
 		int hash_val = data % size;
-		if(arr[hash_val] == data){
-			arr[hash_val] = 0;
-			return;
-		}
-		else{
-			int start = hash_val;
-			int end = (hash_val + 1) % size;
-			while(start != end){
-				if(arr[end] == data){
-					arr[end] = 0;
+		int temp = hash_val;
+		while(true){
+			if(arr[hash_val] == data){
+				arr[hash_val] = 0;
+				return;
+			}
+			else{
+				hash_val = (hash_val + 1) % size;
+				if(hash_val == temp){
+					cout << "Search element not present in the hashtable" << endl;
 					return;
 				}
-				else{
-					end = (end + 1) % size;		
-				}
 			}
-			cout<<"Data not present in the hashtable"<<endl;
 		}
 	}
 	
