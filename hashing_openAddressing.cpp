@@ -15,43 +15,35 @@ class HashTable{
 	
 	void insert(int data){
 		int hash_val = data % size;
-		int temp = hash_val;
-		while(true){
-			if(arr[hash_val] == 0){
-				arr[hash_val] = data;
+		for(int i = 0; i < size; i++){
+			int slot = (hash_val + i) % size;
+			if(arr[slot] == 0){
+				arr[slot] = data;
 				return;
 			}
-			else{
-				hash_val = (hash_val + 1) % size;
-				if(hash_val == temp){
-					cout << "No slots available." << endl;
-					return;
-				} 
+			else if(arr[slot] == data){
+				cout << "Key already exist!" << endl;
+				return;
 			}
 		}
+		cout << "No slots available in hash table" << endl;
 	}
 	
 	void del(int data){
 		int hash_val = data % size;
-		int temp = hash_val;
-		while(true){
-			if(arr[hash_val] == data){
-				arr[hash_val] = 0;
+		for(int i=0; i<size; i++){
+			int slot = (hash_val + i) % size;
+			if(arr[slot] == data){
+				arr[slot] = 0;
 				return;
 			}
-			else{
-				hash_val = (hash_val + 1) % size;
-				if(hash_val == temp){
-					cout << "Search element not present in the hashtable" << endl;
-					return;
-				}
-			}
 		}
+		cout << "Key does not exist in the hashtable!" << endl;
 	}
 	
 	void traverse(){
 		for(int i=0; i<size; i++){
-			cout << arr[i] << " ";
+			cout << "Index: " << i << ", Value: " << arr[i] << endl;
 		}
 		cout<<endl;
 	}
@@ -59,12 +51,14 @@ class HashTable{
 
 int main(){
 	HashTable h1(5);
-	h1.insert(5);
-	h1.insert(15);
-	h1.insert(30);
-	h1.insert(35);
+	h1.insert(49);
 	h1.insert(45);
-	h1.del(353);
+	h1.insert(38);
+	h1.insert(26);
+	h1.insert(50);
+	h1.insert(60);
+	h1.insert(456);
+	h1.del(49);
 	h1.traverse();
 	return 0;
 }
