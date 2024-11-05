@@ -28,11 +28,11 @@ void insert(struct node* &temp, int val) {
         if (temp->left == NULL) {
             temp->left = createNode(val);
         } 
-		else {
+	else {
             insert(temp->left, val);
         }
     } 
-	else {
+    else {
         if (temp->right == NULL) {
             temp->right = createNode(val);
         } 
@@ -226,11 +226,11 @@ bool fullTree(struct node *temp){
 			return false;
 		}
 		if (current->left != NULL) {
-            q.push(current->left);
-        }
-        if (current->right != NULL) {
-            q.push(current->right);
-        }
+	            q.push(current->left);
+	        }
+	        if (current->right != NULL) {
+	            q.push(current->right);
+	        }
 	}
 	return true;
 }
@@ -244,11 +244,11 @@ void mirror(struct node *&temp){
 		q.pop();
 		swap(current->left,current->right);
 		if(current->left != NULL) {
-            q.push(current->left);
-        }
-        if(current->right != NULL) {
-            q.push(current->right);
-        }
+	            q.push(current->left);
+	        }
+	        if(current->right != NULL) {
+	            q.push(current->right);
+	        }
 	}
 }
 
