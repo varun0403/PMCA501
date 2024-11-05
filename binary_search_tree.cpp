@@ -27,18 +27,16 @@ void insert(struct node* &temp, int val) {
     if (temp->data > val) {
         if (temp->left == NULL) {
             temp->left = createNode(val);
+	    return;
         } 
-	else {
-            insert(temp->left, val);
-        }
+        insert(temp->left, val);
     } 
 	else {
         	if (temp->right == NULL) {
             		temp->right = createNode(val);
+			return;
        		} 
-		else {
-            		insert(temp->right, val);
-        	}
+            	insert(temp->right, val);
     	}
 }
 
