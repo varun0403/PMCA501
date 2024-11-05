@@ -36,7 +36,7 @@ void insert(struct node* &temp, int val) {
         if (temp->right == NULL) {
             temp->right = createNode(val);
         } 
-		else {
+	else {
             insert(temp->right, val);
         }
     }
