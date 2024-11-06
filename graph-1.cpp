@@ -86,15 +86,15 @@ class Graph{
                     visited[i] = true;
                     if(parent[i] == -1){
                     	parent[i] = temp;
-					}
-					else{
-						return true;
-					}
+		    }
+		    else{
+			return true;
+		    }
                 }
             }
-		}
-		return false;
 	}
+	return false;
+     }
 };
 
 int main(){
