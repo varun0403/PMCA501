@@ -28,7 +28,7 @@ int priority(char c){
 
 struct node *generateExpressionTree(string postfix){
 	stack<struct node*>s;
-	char left,right,leftNode_val,rightNode_val;
+	char left,right;
 	for(int i=0; i<postfix.length(); i++){
 		char c = postfix[i];
 		if(priority(c) == 0){
