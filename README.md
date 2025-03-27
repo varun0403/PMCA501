@@ -1,5 +1,1 @@
-Greetings! 
-
-This repository was created to add the cpp files for the PMCA501 course. Anybody having a doubt in the program's logic can refer here.
-
-VIT Chennai - MCA(2024-26) 
+The following programs were written for the course "Data Structures and Algorithms" in my first sem of MCA program at VITc
